@@ -70,11 +70,14 @@ function require_wp_db_alt() {
 	global $wpdb_alt;
 	$wpdb_saved = null;
 	$wpdb_alt = new wpdb( DB_USER_ALT, DB_PASSWORD_ALT, DB_NAME_ALT, DB_HOST_ALT );
+	
+	echo "Switching to alt to complete definition" . PHP_EOL;
 	wpdb_alt();
 	wp_set_wpdb_vars();
+	echo "Switching back." . PHP_EOL;
 	wpdb_alt( false );
 	
-	print_r( $wpdb_alt );
+	bw_trace2( $wpdb_alt, "wpdb_alt" );
 }
 
 
@@ -92,17 +95,20 @@ function wpdb_alt( $alt=true ){
 	global $wpdb_alt;
 	
 	if ( $alt ) {
-		if ( $wpdb_saved != $wpdb ) {
+		if ( $wpdb_saved !== $wpdb ) {
 			$wpdb_saved = $wpdb;
 			$wpdb = $wpdb_alt;
 		} else {
 			echo "Already switched";
+			gob();
 		}
 	} else {
-		if ( $wpdb == $wpdb_alt ) {
+		if ( $wpdb === $wpdb_alt ) {
 			$wpdb = $wpdb_saved;
+			$wpdb_saved = null;
 		} else {
 			echo "Already reset";
+			gob();
 		}
 	}
 	return( $wpdb );
@@ -113,7 +119,7 @@ function report_wpdb() {
 	print_r( $wpdb );
 }
 
-report_wpdb();
+//report_wpdb();
 
 require_wp_db_alt();
 
