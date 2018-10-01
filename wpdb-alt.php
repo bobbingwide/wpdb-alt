@@ -121,8 +121,9 @@ function report_wpdb() {
 
 //report_wpdb();
 
-require_wp_db_alt();
-
+if ( "cli" === php_sapi_name() ) {
+	require_wp_db_alt();
+}
 
 	
 	

@@ -1,6 +1,7 @@
 <?php // (C) Copyright Bobbing Wide 2017
 
 /**
+ * Syntax: oikwp reconcile.php 
  * Reconciles content
  * 
  * Note: This logic depends on wpdb-alt being activated.
@@ -39,4 +40,15 @@ function reconcile( $post_type="post" ) {
 
 reconcile( "post" );
 reconcile( "page" );
+reconcile( "oik-plugins" );
+reconcile( "oik_pluginversion" );
+reconcile( "oik_premiumversion" );
+reconcile( "oik-themes" );
+reconcile( "oik_themeversion" );
+reconcile( "oik_themiumversion" );
+reconcile( "oik_shortcodes" );
+reconcile( "oik_sc_param" );
+reconcile( "shortcode_example" );
+reconcile( "attachment" );
+
 
